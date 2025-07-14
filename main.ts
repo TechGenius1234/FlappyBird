@@ -5,7 +5,8 @@ controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Press
 })
 let toppipe2: Sprite = null
 let toppipe1: Sprite = null
-let gap = 0
+let gaptop = 0
+let gapbottom = 0
 let mySprite: Sprite = null
 game.splash("Welcome to the game.", "Press A to start")
 mySprite = sprites.create(img`
@@ -32,20 +33,12 @@ game.setGameOverMessage(false, "GAME OVER!")
 info.setScore(0)
 game.splash("To play you need to press", "A or space key.")
 game.onUpdateInterval(1500, function () {
-    gap += randint(0, 3)
-    if (gap == 0) {
-    	
-    } else if (gap == 1) {
-        toppipe1 = sprites.create(assets.image`pipe`, SpriteKind.Enemy)
-        toppipe2 = sprites.create(assets.image`pipe1`, SpriteKind.Enemy)
-    } else if (gap == 2) {
-    	
-    } else if (gap == 3) {
-    	
-    } else {
-        sprites.destroy(mySprite)
-        console.log("FATAL ERROR: Gap in code exeeded set amount.")
-        game.splash("Fatal error.", "Gap exeeded 3")
-        game.reset()
-    }
+    gaptop += randint(0, 100)
+    gapbottom += randint(0, -100)
+    toppipe1 = sprites.create(assets.image`pipe`, SpriteKind.Enemy)
+    toppipe2 = sprites.create(assets.image`pipe1`, SpriteKind.Enemy)
+    toppipe1.setPosition(0, gaptop)
+    toppipe2.setPosition(0, gapbottom)
+
+
 })

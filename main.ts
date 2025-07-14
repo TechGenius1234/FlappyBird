@@ -1,12 +1,7 @@
-controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
-    mySprite.setVelocity(0, -100)
-    pause(150)
-    mySprite.setVelocity(0, 100)
-})
 let toppipe2: Sprite = null
 let toppipe1: Sprite = null
-let gaptop = 0
 let gapbottom = 0
+let gaptop = 0
 let mySprite: Sprite = null
 game.splash("Welcome to the game.", "Press A to start")
 mySprite = sprites.create(img`
@@ -33,12 +28,18 @@ game.setGameOverMessage(false, "GAME OVER!")
 info.setScore(0)
 game.splash("To play you need to press", "A or space key.")
 game.onUpdateInterval(1500, function () {
+    sprites.destroy(toppipe1)
+    sprites.destroy(toppipe2)
     gaptop += randint(0, 100)
     gapbottom += randint(0, -100)
     toppipe1 = sprites.create(assets.image`pipe`, SpriteKind.Enemy)
     toppipe2 = sprites.create(assets.image`pipe1`, SpriteKind.Enemy)
-    toppipe1.setPosition(0, gaptop)
-    toppipe2.setPosition(0, gapbottom)
-
-
+    toppipe1.setPosition(gaptop, 0)
+    toppipe2.setPosition(gapbottom, 0)
+    
 })
+controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
+    mySprite.setVelocity(0, -100)
+    pause(150)
+    mySprite.setVelocity(0, 100)
+})   

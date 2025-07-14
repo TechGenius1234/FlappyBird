@@ -1,6 +1,12 @@
-game.splash("Welcome to the game.", "Press A to continue")
-mySprite.setStayInScreen(true)
-let mySprite = sprites.create(img`
+controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
+    mySprite.setVelocity(0, -100)
+    pause(150)
+    mySprite.setVelocity(0, 100)
+})
+let mySprite: Sprite = null
+let gap = 0
+game.splash("Welcome to the game.", "Press A to start")
+mySprite = sprites.create(img`
     . . . . . . . . . . b 5 b . . . 
     . . . . . . . . . b 5 b . . . . 
     . . . . . . b b b b b b . . . . 
@@ -18,6 +24,25 @@ let mySprite = sprites.create(img`
     . . . c c c c c c c c b b . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
+mySprite.setStayInScreen(true)
 mySprite.setVelocity(0, 100)
 game.setGameOverMessage(false, "GAME OVER!")
 info.setScore(0)
+game.splash("To play you need to press", "A or space key.")
+game.onUpdateInterval(1500, function () {
+    gap += randint(0, 4)
+    if (gap == 0) {
+    	
+    } else if (gap == 1) {
+    	
+    } else if (gap == 2) {
+    	
+    } else if (gap == 3) {
+    	
+    } else {
+        sprites.destroy(mySprite)
+        console.log("FATAL ERROR: Gap in code exeeded set amount.")
+        game.splash("Fatal error.", "Gap exeeded 3")
+        game.reset()
+    }
+})
